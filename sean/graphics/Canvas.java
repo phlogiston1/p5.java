@@ -75,7 +75,6 @@ public class Canvas extends JPanel{
         getInstance().getGraphics().dispose();
     }
     public static void revalidateCanvas(){
-        System.out.println("repainting");
         getInstance().revalidate();
         getInstance().repaint();
     }

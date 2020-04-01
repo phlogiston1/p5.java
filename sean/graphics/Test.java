@@ -11,10 +11,9 @@ public class Test extends p5 {
         new Test().start();
     }
     public void setup(){
-        System.out.println("setup");
         createCanvas(400,400);
         background(color(100,100,155));
-        frameRate(300);
+        frameRate(30);
     }
     int i = 0;
     public void draw() {

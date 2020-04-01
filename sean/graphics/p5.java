@@ -25,10 +25,7 @@ public class p5 extends Constants implements Runnable {
     public void draw() {
     }
     public static void clear(){
-        clearLines();
-        clearArcs();
-        clearEllipses();
-        clearCircles();
+        clearEverything();
     }
 
     /**
@@ -47,7 +44,7 @@ public class p5 extends Constants implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            clear();
+            clearEverything();
         }
     }
 }
