@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 import sean.graphics.shapes.ShapeBase;
 import sean.graphics.shapes.Shapes;
+import sean.graphics.shapes.Shapes.Arc;
+import sean.graphics.shapes.Shapes.Circle;
+import sean.graphics.shapes.Shapes.Ellipse;
+import sean.graphics.shapes.Shapes.Line;
+import sean.graphics.shapes.Shapes.Rectangle;
 
 import java.awt.*;
 
@@ -31,28 +36,56 @@ public class Shape extends P5Color{
         }
     }
 
-    public static void line(int x1,int y1, int x2, int y2){
-        shapes.add(Shapes.createLine(x1,y1,x2,y2));
+    public static Line line(int x1,int y1, int x2, int y2){
+        Line ln = Shapes.createLine(x1,y1,x2,y2);
+        shapes.add(ln);
         addFS();
+        return ln;
     }
-    public static void point(int x, int y){
-        shapes.add(Shapes.createPoint(x,y));
+    public static Shapes.Point point(int x, int y){
+        Shapes.Point pt = Shapes.createPoint(x,y);
+        shapes.add(pt);
         addFS();
-    }
-
-    public static void arc(int x, int y, int w, int h, int start, int stop){
-        shapes.add(Shapes.createArc(x, y, w, h, start, stop));
-        addFS();
-    }
-
-    public static void ellipse(int x, int y, int h, int w){
-        shapes.add(Shapes.createEllipse(x, y, w, h));
-        addFS();
+        return pt;
     }
 
-    public static void circle(int x, int y, int d){
-        shapes.add(Shapes.createCircle(x, y, d));
+    public static Arc arc(int x, int y, int w, int h, int start, int stop){
+        Arc ac = Shapes.createArc(x, y, w, h, start, stop);
+        shapes.add(ac);
         addFS();
+        return ac;
+    }
+
+    public static Ellipse ellipse(int x, int y, int h, int w){
+        Ellipse ep = Shapes.createEllipse(x, y, w, h);
+        shapes.add(ep);
+        addFS();
+        return ep;
+    }
+
+    public static Circle circle(int x, int y, int d){
+        Circle cl = Shapes.createCircle(x, y, d);
+        shapes.add(cl);
+        addFS();
+        return cl;
+    }
+    public static Rectangle rect(int x, int y, int w){
+        Rectangle rt = Shapes.createRect(x, y, w);
+        shapes.add(rt);
+        addFS();
+        return rt;
+    }
+    public static Rectangle rect(int x, int y, int w, int h){
+        Rectangle rt = Shapes.createRect(x, y, w,h);
+        shapes.add(rt);
+        addFS();
+        return rt;
+    }
+    public static Rectangle rect(int x, int y, int w, int h, int arcWidth, int arcHeight){
+        Rectangle rt = Shapes.createRect(x, y, w,h, arcWidth, arcHeight);
+        shapes.add(rt);
+        addFS();
+        return rt;
     }
 
     private static void addFS(){

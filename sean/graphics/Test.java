@@ -22,6 +22,7 @@ public class Test extends p5 {
         point(40,40);
         line(0,0,200,i);
         strokeWeight(2);
+        rect(10,10,10, 20, 5,10);
         noFill();
         circle(150,i - 50,100);
         fill(255,255,255);

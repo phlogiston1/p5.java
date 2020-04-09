@@ -112,6 +112,16 @@ public class Shapes extends Shape{
             g.fillOval(x,y,pointWidth,pointWidth);
         }
     }
+
+    public static Rectangle createRect(int x, int y, int w){
+        return new Shapes().new Rectangle(x, y, w);
+    }
+    public static Rectangle createRect(int x, int y, int w, int h){
+        return new Shapes().new Rectangle(x, y, w, h);
+    }
+    public static Rectangle createRect(int x, int y, int w, int h, int arcWidth, int arcHeight){
+        return new Shapes().new Rectangle(x, y, w, h, arcWidth, arcHeight);
+    }
     public class Rectangle implements ShapeBase{
         public Rectangle(int x, int y, int w){
             mX = x;
