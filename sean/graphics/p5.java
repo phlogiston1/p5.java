@@ -2,20 +2,29 @@ package sean.graphics;
 
 public class p5 extends Constants implements Runnable {
     boolean running = true;
-    static int frameRate;
+    static int frameRate = 30;
+    static boolean clear = true;
+
+    public static void noClear() {
+        clear = false;
+    }
 
     public p5() {
         setup();
+        initCanvas();
         new Thread(this).run();
     }
-    public static void main(String args[]){
+
+    public static void main(String args[]) {
         new p5().start();
     }
-    public void start(){
+
+    public void start() {
         setup();
         new Thread(this).run();
     }
-    public static void frameRate(int rate){
+
+    public static void frameRate(int rate) {
         frameRate = rate;
     }
 
@@ -24,8 +33,10 @@ public class p5 extends Constants implements Runnable {
 
     public void draw() {
     }
-    public static void clear(){
-        clearEverything();
+
+    public static void clear() {
+        if (clear)
+            clearEverything();
     }
 
     /**
@@ -44,7 +55,7 @@ public class p5 extends Constants implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            clearEverything();
+            clear();
         }
     }
 }

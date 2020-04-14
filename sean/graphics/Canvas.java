@@ -3,7 +3,6 @@ package sean.graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class Canvas extends JPanel{
     /**
@@ -22,6 +21,8 @@ public class Canvas extends JPanel{
     static JFrame frame;
 
     static boolean frameCreated = false;
+
+    static boolean scaling = false;
 
     /*public Canvas(int height, int width) {
         super();
@@ -65,33 +66,40 @@ public class Canvas extends JPanel{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(w, h);
         frame.setVisible(true);
-
         frameCreated = true;
     }
-    public static void clear(){
+
+    public static void clear() {
         dispose();
     }
-    public static void dispose(){
+
+    public static void dispose() {
         getInstance().getGraphics().dispose();
     }
-    public static void revalidateCanvas(){
+
+    public static void revalidateCanvas() {
         getInstance().revalidate();
         getInstance().repaint();
     }
-    public static void createCanvas(int w,int h){
+    public static void initCanvas(){
+    }
+    public static void createCanvas(int w, int h) {
         frame = new JFrame();
         frame.setContentPane(getInstance());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(w,h);
+        frame.setSize(w, h);
         frame.setVisible(true);
 
         frameCreated = true;
     }
-    public void paint(Graphics g){
+
+    public void paint(Graphics g) {
         super.paint(g);
         Shape.draw(g);
     }
-
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
+    }
     public static void main(String args[]){
         //Canvas p5 = new Canvas(100,100);
         Canvas.createCanvas("yo");

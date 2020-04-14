@@ -8,7 +8,7 @@ public class Trajectory extends p5{
      */
     private static final long serialVersionUID = 1L;
     public static final double G = 32.174;
-    public static double velocity = 20, angle = 67, height = 3.2;
+    public static double velocity = 100, angle = 45, height = 0;
     /*public static void main(String args[]){
         System.out.println(getTimeToLand(velocity, Math.toRadians(angle), height));
         System.out.println(trajectoryCurve(1.9, 20, Math.toRadians(angle), height, -3));
@@ -19,14 +19,20 @@ public class Trajectory extends p5{
     }
     public void setup(){
         createCanvas(500,500);
+        frameRate((int)velocity);
+        noClear();
+        strokeWeight(2);
     }
-    int i = 1;
+    double i = 0;
     double prevTCI = 1;
     public void draw() {
-        double trajectoryCurveI = trajectoryCurve(10, 20, Math.toRadians(angle), height, i);
-        line(i-1, 250 + (int)prevTCI, i, 250 + (int)trajectoryCurveI);
+        double trajectoryCurveI = trajectoryCurve(0, velocity, Math.toRadians(-angle), height, i/velocity);
+        stroke(0,0,0);
+        line((int)i-1, 450 - (int)(prevTCI * 10), (int)i, 450 - (int)(trajectoryCurveI * 10));
+        stroke(0,100,0);
+        line(0,450,500,450);
         prevTCI = trajectoryCurveI;
-        i++;
+        i = i + 1;
     }
     public static double getTimeToLand(double v, double s, double u){
         double value1 = v * Math.sin(s) + Math.sqrt((v * Math.sin(s)) * (v * Math.sin(s)) + (2 * G * u));
@@ -36,22 +42,5 @@ public class Trajectory extends p5{
         //double value1 = (distance - (v * Math.cos(s)) * pointDistance - ((G / 2) * pointDistance * pointDistance) + (v * Math.sin(s) * pointDistance) + u);
         double value1 = -(G/2) * (((distance - pointDistance)/(v * Math.cos(s))) * ((distance - pointDistance)/(v * Math.cos(s)))) + (v * Math.sin(s) * (distance - pointDistance)/(v * Math.cos(s)) + u);
         return value1;
-    }
-    public static double findAngle(double distance, double v, double goalHeight, double u, double pointDistance){
-        double guessAngle = angle;
-        double guess = trajectoryCurve(distance, v, Math.toRadians(guessAngle), u, pointDistance);
-        double guessTrajectory;
-        guessTrajectory = trajectoryCurve(distance, v, Math.toRadians(guess), u, pointDistance);
-        while(guessTrajectory > goalHeight - 0.1 || guessTrajectory < goalHeight + 0.1){
-            if(guessTrajectory > goalHeight){
-                guessAngle -= 0.1;
-            }
-            if(guessTrajectory < goalHeight){
-                guessAngle += 0.1;
-            }
-            System.out.println(guessTrajectory);
-            System.out.println(guessAngle);
-        }
-        return guessAngle;
     }
 }
