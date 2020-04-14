@@ -2,7 +2,7 @@ package sean.graphics;
 
 import java.awt.Color;
 
-public class P5Color extends Canvas{
+public class P5Color extends Image{
     /**
      *
      */

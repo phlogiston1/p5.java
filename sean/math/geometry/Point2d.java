@@ -36,9 +36,10 @@ public class Point2d {
         double p = Math.atan2(point.y_, point.x_);
         return new PolarPoint2d(r,p);
     }
-    public void transformBy(double x, double y){
+    public Point2d transformBy(double x, double y){
         x_ += x;
         y_ += y;
+        return this;
     }
     public String toString(){
         return "X: " + x_ + " Y: " + y_;

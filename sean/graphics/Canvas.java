@@ -3,6 +3,7 @@ package sean.graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.*;
+import java.awt.PointerInfo;
 
 public class Canvas extends JPanel{
     /**
@@ -83,14 +84,23 @@ public class Canvas extends JPanel{
     }
     public static void initCanvas(){
     }
-    public static void createCanvas(int w, int h) {
+    public static Canvas createCanvas(int w, int h) {
         frame = new JFrame();
         frame.setContentPane(getInstance());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(w, h);
         frame.setVisible(true);
-
         frameCreated = true;
+        return new Canvas();
+    }
+    public void position(int x, int y){
+        frame.setLocation(x,y);
+    }
+    public static double mouseX() {
+        return MouseInfo.getPointerInfo().getLocation().getX() - frame.getLocation().getX()-10;
+    }
+    public static double mouseY() {
+        return MouseInfo.getPointerInfo().getLocation().getY() - frame.getLocation().getY()-30;
     }
 
     public void paint(Graphics g) {

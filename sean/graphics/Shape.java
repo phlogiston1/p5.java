@@ -12,7 +12,7 @@ import sean.graphics.shapes.Shapes.Rectangle;
 
 import java.awt.*;
 
-public class Shape extends P5Color{
+public class Shape extends Typography{
     private static final long serialVersionUID = 1L;
 
     static ArrayList<ShapeBase> shapes = new ArrayList<ShapeBase>();
@@ -35,7 +35,12 @@ public class Shape extends P5Color{
             }
         }
     }
-
+    public static Typography.Text text(String s, int x, int y){
+        Typography.Text txt = new Typography().new Text(s,x,y, Typography.cFont);
+        shapes.add(txt);
+        addFS();
+        return txt;
+    }
     public static Line line(int x1,int y1, int x2, int y2){
         Line ln = Shapes.createLine(x1,y1,x2,y2);
         shapes.add(ln);

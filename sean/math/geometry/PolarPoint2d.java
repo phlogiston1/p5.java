@@ -52,10 +52,11 @@ public class PolarPoint2d {
         r_ += r;
         p_ += p.getRadians();
     }*/
-    public void cartesianTransform(double transformX, double transformY){
+    public PolarPoint2d cartesianTransform(double transformX, double transformY){
         Point2d cartesianPoint = getCartesianPoint(this);
         cartesianPoint.transformBy(transformX,transformY);
         updateValues(Point2d.getPolarPoint(cartesianPoint));
+        return this;
     }
     /*public static PolarPoint2d fromPose(Pose2d pose){
         Translation2d translation = pose.getTranslation();
@@ -64,5 +65,8 @@ public class PolarPoint2d {
     }*/
     public String toString(){
         return "R: " + r_ + " P: " + p_;
+    }
+    public static PolarPoint2d drawBetween(Point2d p1, Point2d p2){
+        return Point2d.getPolarPoint(p2).cartesianTransform(p1.getX(), p1.getY());
     }
 }

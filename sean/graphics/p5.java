@@ -4,6 +4,7 @@ public class p5 extends Constants implements Runnable {
     boolean running = true;
     static int frameRate = 30;
     static boolean clear = true;
+    static int loop = -1;
 
     public static void noClear() {
         clear = false;
@@ -11,8 +12,16 @@ public class p5 extends Constants implements Runnable {
 
     public p5() {
         setup();
+        addMouseListener();
+        addKeyboardListener();
         initCanvas();
         new Thread(this).run();
+    }
+    public static void loop(){
+        loop = -1;
+    }
+    public static void noLoop(){
+        loop = 0;
     }
 
     public static void main(String args[]) {
@@ -33,6 +42,12 @@ public class p5 extends Constants implements Runnable {
 
     public void draw() {
     }
+    public void redraw(){
+        if(loop == 0) loop = 1;
+    }
+    public void redraw(int n){
+        if(loop == 0) loop = n;
+    }
 
     public static void clear() {
         if (clear)
@@ -47,15 +62,19 @@ public class p5 extends Constants implements Runnable {
     @Override
     public void run() {
         while (running) {
-            dispose();
-            draw();
+            updateMouse();
+            if(loop != 0){
+                clear();
+                dispose();
+                draw();
+                if(loop > 0) loop--;
+            }
             revalidateCanvas();
             try {
                 Thread.sleep(1000/frameRate);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            clear();
         }
     }
 }
