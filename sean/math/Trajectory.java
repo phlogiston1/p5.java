@@ -1,8 +1,11 @@
 package sean.math;
 
+import sean.graphics.P5Color;
 import sean.graphics.p5;
+import sean.graphics.graphs.SimpleGraph;
+import sean.graphics.graphs.Trace;
 
-public class Trajectory extends p5{
+public class Trajectory{
     /**
      *
      */
@@ -15,24 +18,14 @@ public class Trajectory extends p5{
         //System.out.println(findAngle(1.9,20,7,height,-3));
     }*/
     public static void main(String args[]) {
-        new Trajectory().start();
-    }
-    public void setup(){
-        createCanvas(500,500);
-        frameRate((int)velocity);
-        noClear();
-        strokeWeight(2);
-    }
-    double i = 0;
-    double prevTCI = 1;
-    public void draw() {
-        double trajectoryCurveI = trajectoryCurve(0, velocity, Math.toRadians(-angle), height, i/velocity);
-        stroke(0,0,0);
-        line((int)i-1, 450 - (int)(prevTCI * 10), (int)i, 450 - (int)(trajectoryCurveI * 10));
-        stroke(0,100,0);
-        line(0,450,500,450);
-        prevTCI = trajectoryCurveI;
-        i = i + 1;
+        SimpleGraph g = new SimpleGraph();
+        g.run();
+        Trace trace = new Trace();
+        for(int i = 0; i < 2000; i++){
+            trace.values.add(trajectoryCurve(1.9,20,Math.toRadians(angle), height, i));
+        }
+        trace.color = new P5Color(0,200,0);
+        g.updateValues(trace);
     }
     public static double getTimeToLand(double v, double s, double u){
         double value1 = v * Math.sin(s) + Math.sqrt((v * Math.sin(s)) * (v * Math.sin(s)) + (2 * G * u));

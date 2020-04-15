@@ -5,10 +5,17 @@ import java.awt.Graphics;
 import sean.graphics.Shape;
 
 public class Shapes extends Shape{
-    public static Line createLine(int x1, int y1, int x2, int y2){
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+
+    public static Line createLine(int x1, int y1, int x2, int y2) {
         return new Shapes().new Line(x1, y1,x2,y2);
     }
     public class Line implements ShapeBase {
+        public double scalar = 1;
+        public int translateX = 0, translateY = 0;
         public int x1,y1,x2,y2;
         public Line(int x1i, int y1i, int x2i, int y2i){
             x1 = x1i;
@@ -18,12 +25,21 @@ public class Shapes extends Shape{
         }
         @Override
         public void paint(Graphics g) {
-            g.drawLine(x1, y1, x2, y2);
+            System.out.println("drawing line to: " + (int)(x1*scalar) + translateX + " " + (int)(y1*scalar) + translateY + " " +  (int)(x2*scalar) + translateX + " " + (int)(y2*scalar) + translateY);
+            g.drawLine((int)(x1*scalar) + translateX, (int)(y1*scalar) + translateY, (int)(x2*scalar) + translateX, (int)(y2*scalar) + translateY);
         }
 
         @Override
         public void fill(Graphics g) {
-            g.drawLine(x1, y1, x2, y2);
+            System.out.println("drawing line to: " + (int)(x1*scalar) + translateX + " " + (int)(y1*scalar) + translateY + " " +  (int)(x2*scalar) + translateX + " " + (int)(y2*scalar) + translateY);
+            g.drawLine((int)(x1*scalar) + translateX, (int)(y1*scalar) + translateY, (int)(x2*scalar) + translateX, (int)(y2*scalar) + translateY);
+        }
+
+        @Override
+        public void setST(double s, int tX, int tY) {
+            scalar = s;
+            translateX = tX;
+            translateY = tY;
         }
     }
 
@@ -32,6 +48,8 @@ public class Shapes extends Shape{
         return new Shapes().new Arc(x, y,w,h,start, stop);
     }
     public class Arc implements ShapeBase {
+        public double scalar;
+        public int translateX, translateY;
         public int x,y,w,h,start,stop;
         public Arc(int xi, int yi, int wi, int hi, int starti, int stopi){
             x = xi;
@@ -43,11 +61,17 @@ public class Shapes extends Shape{
         }
         @Override
         public void paint(Graphics g) {
-            g.drawArc(x, y, w, h, start, stop);
+            g.drawArc((int)(x*scalar) + translateX, (int)(y*scalar) + translateY, (int)(w*scalar), (int)(h*scalar), start, stop);
         }
         @Override
         public void fill(Graphics g) {
-            g.fillArc(x, y, w, h, start, stop);
+            g.fillArc((int)(x*scalar) + translateX, (int)(y*scalar) + translateY, (int)(w*scalar), (int)(h*scalar), start, stop);
+        }
+        @Override
+        public void setST(double s, int tX, int tY) {
+            scalar = s;
+            translateX = tX;
+            translateY = tY;
         }
     }
 
@@ -56,6 +80,8 @@ public class Shapes extends Shape{
         return new Shapes().new Circle(x,y,d);
     }
     public class Circle implements ShapeBase{
+        public double scalar;
+        public int translateX, translateY;
         public int x,y,d;
         public Circle(int xi, int yi, int di){
             x = xi;
@@ -64,11 +90,17 @@ public class Shapes extends Shape{
         }
         @Override
         public void paint(Graphics g) {
-            g.drawOval(x,y,d,d);
+            g.drawOval((int)(x*scalar) + translateX,(int)(y*scalar) + translateY,(int)(d*scalar),(int)(d*scalar));
         }
         @Override
         public void fill(Graphics g) {
-            g.fillOval(x,y,d,d);
+            g.fillOval((int)(x*scalar) + translateX,(int)(y*scalar) + translateY,(int)(d*scalar),(int)(d*scalar));
+        }
+        @Override
+        public void setST(double s, int tX, int tY) {
+            scalar = s;
+            translateX = tX;
+            translateY = tY;
         }
     }
 
@@ -77,6 +109,8 @@ public class Shapes extends Shape{
     }
     public class Ellipse implements ShapeBase{
         int x,y,w,h;
+        public double scalar;
+        public int translateX, translateY;
         public Ellipse(int xi, int yi, int wi, int hi){
             x = xi;
             y = yi;
@@ -85,17 +119,25 @@ public class Shapes extends Shape{
         }
         @Override
         public void paint(Graphics g) {
-            g.drawOval(x, y, w, h);
+            g.drawOval((int)(x * scalar) + translateX, (int)(y * scalar) + translateY, (int)(w * scalar), (int)(h * scalar));
         }
         @Override
         public void fill(Graphics g) {
-            g.fillOval(x, y, w, h);
+            g.fillOval((int)(x * scalar) + translateX, (int)(y * scalar) + translateY, (int)(w * scalar), (int)(h * scalar));
+        }
+        @Override
+        public void setST(double s, int tX, int tY) {
+            scalar = s;
+            translateX = tX;
+            translateY = tY;
         }
     }
     public static Point createPoint(int x, int y){
         return new Shapes().new Point(x,y);
     }
     public class Point implements ShapeBase{
+        public int translateX, translateY;
+        public double scalar;
         int x, y;
         public Point(int ix, int iy){
             x = ix;
@@ -104,12 +146,18 @@ public class Shapes extends Shape{
 
         @Override
         public void paint(Graphics g) {
-            g.fillOval(x,y,pointWidth,pointWidth);
+            g.fillOval((int)(x*scalar) + translateX,(int)(y*scalar) + translateY,pointWidth,pointWidth);
         }
 
         @Override
         public void fill(Graphics g) {
-            g.fillOval(x,y,pointWidth,pointWidth);
+            g.fillOval((int)(x*scalar) + translateX,(int)(y*scalar) + translateY,pointWidth,pointWidth);
+        }
+        @Override
+        public void setST(double s, int tX, int tY) {
+            translateX = tX;
+            translateY = tY;
+            scalar = s;
         }
     }
 
@@ -123,6 +171,8 @@ public class Shapes extends Shape{
         return new Shapes().new Rectangle(x, y, w, h, arcWidth, arcHeight);
     }
     public class Rectangle implements ShapeBase{
+        public double scalar;
+        public int translateX, translateY;
         public Rectangle(int x, int y, int w){
             mX = x;
             mY = y;
@@ -146,12 +196,18 @@ public class Shapes extends Shape{
         public int mX,mY,mW,mH,mAw = 0,mAh = 0;
         @Override
         public void paint(Graphics g) {
-            g.drawRoundRect(mX, mY, mW, mH, mAw, mAh);
+            g.drawRoundRect((int)(mX * scalar) + translateX, (int)(mY * scalar) + translateY, (int)(mW * scalar), (int)(mH * scalar), (int)(mAw * scalar), (int)(mAh * scalar));
         }
 
         @Override
         public void fill(Graphics g) {
-            g.fillRoundRect(mX, mY, mW, mH, mAw, mAh);
+            g.fillRoundRect((int)(mX * scalar) + translateX, (int)(mY * scalar) + translateY, (int)(mW * scalar), (int)(mH * scalar), (int)(mAw * scalar), (int)(mAh * scalar));
+        }
+        @Override
+        public void setST(double s, int tX, int tY) {
+            scalar = s;
+            translateX = tX;
+            translateY = tY;
         }
     }
 }

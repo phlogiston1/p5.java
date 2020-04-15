@@ -15,7 +15,8 @@ public class Mouse extends Canvas implements MouseListener, MouseWheelListener{
                          winMouseX,
                          winMouseY,
                          pwinMouseX,
-                         pwinMouseY;
+                         pwinMouseY,
+                         wheelIntegrated;
     private static double prevx, prevy;
     public static boolean mouseIsPressed = false;
     public static int mouseButton = 0;
@@ -112,6 +113,7 @@ public class Mouse extends Canvas implements MouseListener, MouseWheelListener{
         System.out.println("wheelMoved");
         mouseWheel();
         mouseWheel(new WheelEvent(0, e.getPreciseWheelRotation()));
+        wheelIntegrated += e.getPreciseWheelRotation();
     }
 
 }

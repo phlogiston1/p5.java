@@ -3,7 +3,6 @@ package sean.graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.*;
-import java.awt.PointerInfo;
 
 public class Canvas extends JPanel{
     /**

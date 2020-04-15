@@ -24,6 +24,7 @@ public class Typography extends P5Color{
         String contents;
         int mx, my;
         Font mFont;
+        public int translateX = 0, translateY = 0;
 
         public Text(String s, int x, int y, Font font) {
             contents = s;
@@ -36,15 +37,20 @@ public class Typography extends P5Color{
         public void paint(Graphics g) {
             Graphics2D g2d = (Graphics2D)g;
             g2d.setFont(mFont);
-            g2d.drawString(contents, mx, my);
-            System.out.println("painting da texts: " + contents);
+            g2d.drawString(contents, mx + translateX, my + translateY);
         }
 
         @Override
         public void fill(Graphics g) {
             Graphics2D g2d = (Graphics2D)g;
             g2d.setFont(mFont);
-            g2d.drawString(contents, mx, my);
+            g2d.drawString(contents, mx + translateX, my + translateY);
+        }
+
+        @Override
+        public void setST(double s, int tX, int tY) {
+            translateX = tX;
+            translateY = tY;
         }
     }
     public static void textSize(float newSize){

@@ -35,6 +35,12 @@ public class P5Color extends Image{
         stroke.g = g;
         stroke.b = b;
     }
+    public static void stroke(P5Color c){
+        stroke.stroke = true;
+        stroke.r = c.m_r;
+        stroke.g = c.m_g;
+        stroke.b = c.m_b;
+    }
     public static void noStroke(){
         stroke.stroke = false;
     }

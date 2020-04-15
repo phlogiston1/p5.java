@@ -1,6 +1,7 @@
 package sean.graphics;
 
 import sean.graphics.event.WheelEvent;
+import sean.graphics.graphs.ZoomableHelper;
 
 public class Test extends p5 {
     /**
@@ -8,6 +9,7 @@ public class Test extends p5 {
      */
     private static final long serialVersionUID = 1L;
     Canvas c;
+    ZoomableHelper z;
     public static void main(String args[]) {
         new Test().start();
     }
@@ -15,16 +17,20 @@ public class Test extends p5 {
         c = createCanvas(400, 400);
         background(color(100,100,155));
         frameRate(30);
+        z = new ZoomableHelper();
     }
-    int i = 0;
+    int i = 0, x = 0, y = 0;
     public void draw() {
+        z.updateZoom(movedX,movedY);
         //i = (int)movedX;
         stroke(0,255,0);
         strokeWeight(10);
         point(40,40);
         line(0,0,200,i);
+        stroke(0,0,255);
         strokeWeight(2);
         rect(10,10,10, 20, 5,10);
+        stroke(0,0,255);
         noFill();
         circle(150,i - 50,100);
         fill(255,255,255);
@@ -44,8 +50,9 @@ public class Test extends p5 {
         }
         if(keyIsPressed){
             i++;
+            z.reset();
         }
-        textSize(32);
+        textSize((float)mouseX);
         textFont("Jokerman");
         textStyle(BOLD);
         text(""+key, 250,i - 10);
@@ -57,12 +64,10 @@ public class Test extends p5 {
     public void mouseWheel(WheelEvent e){
         System.out.println(e.deltaY);
         i += e.deltaY * 10;
+        z.mouseWheelMoved(e);
     }
     public void mousePressed(){
-        loop();
     }
     public void mouseReleased(){
-        noLoop();
-        redraw(i);
     }
 }
