@@ -18,9 +18,13 @@ public class ZoomableHelper {
         Shape.translate(x, y);
     }
     public void mouseWheelMoved(WheelEvent e){
-        zoom += e.deltaY;
-        x -= (p5.mouseX * e.deltaY) - p5.mouseX / zoom;
-        y -= (p5.mouseY * e.deltaY) - p5.mouseY / zoom;
+        double dy = e.deltaY;
+        if(zoom > 1 || dy > 0){
+            zoom += dy;
+            System.out.println(zoom);
+            x -= (p5.mouseX * dy) - p5.mouseX / zoom;
+            y -= (p5.mouseY * dy) - p5.mouseY / zoom;
+        }
     }
     public void reset(){
         x = 0; y = 0; zoom = 1;

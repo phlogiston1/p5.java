@@ -25,13 +25,11 @@ public class Shapes extends Shape{
         }
         @Override
         public void paint(Graphics g) {
-            System.out.println("drawing line to: " + (int)(x1*scalar) + translateX + " " + (int)(y1*scalar) + translateY + " " +  (int)(x2*scalar) + translateX + " " + (int)(y2*scalar) + translateY);
             g.drawLine((int)(x1*scalar) + translateX, (int)(y1*scalar) + translateY, (int)(x2*scalar) + translateX, (int)(y2*scalar) + translateY);
         }
 
         @Override
         public void fill(Graphics g) {
-            System.out.println("drawing line to: " + (int)(x1*scalar) + translateX + " " + (int)(y1*scalar) + translateY + " " +  (int)(x2*scalar) + translateX + " " + (int)(y2*scalar) + translateY);
             g.drawLine((int)(x1*scalar) + translateX, (int)(y1*scalar) + translateY, (int)(x2*scalar) + translateX, (int)(y2*scalar) + translateY);
         }
 

@@ -2,6 +2,8 @@ package sean.graphics;
 
 import sean.graphics.event.WheelEvent;
 import sean.graphics.graphs.ZoomableHelper;
+import sean.math.geometry.Point2d;
+import sean.math.geometry.PolarPoint2d;
 
 public class Test extends p5 {
     /**
@@ -52,19 +54,26 @@ public class Test extends p5 {
             i++;
             z.reset();
         }
+        PolarPoint2d spinnyLine = new PolarPoint2d(10,0);
+        spinnyLine.updateValues(10, i/100);
+        Point2d slreg = PolarPoint2d.getCartesianPoint(spinnyLine);
+        line(200,200,(int)(slreg.getX() * 10) + 200, (int)(slreg.getY() * 10) + 200);
         textSize((float)mouseX);
         textFont("Jokerman");
         textStyle(BOLD);
         text(""+key, 250,i - 10);
+        i += realVelocity;
+        realVelocity /= 1.01;
         //i++;
     }
     public void mouseDragged(){
         line((int)pmouseX, (int)pmouseY, (int)mouseX, (int)mouseY);
     }
+    int realVelocity = 0;
     public void mouseWheel(WheelEvent e){
         System.out.println(e.deltaY);
-        i += e.deltaY * 10;
-        z.mouseWheelMoved(e);
+        realVelocity += e.deltaY;
+        //z.mouseWheelMoved(e);
     }
     public void mousePressed(){
     }

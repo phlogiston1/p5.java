@@ -15,6 +15,8 @@ public class HowToDrawALine extends p5{
     public void draw(){
         strokeWeight(3);
         stroke(0,200,0);
-        line((int)pmouseX,(int)pmouseY,(int)mouseX,(int)mouseY);
+        line((int)(pmouseX + movedX),(int)(pmouseY + movedY),(int)mouseX,(int)mouseY);
+        point(250,250);
+        translate((int)movedX, (int)movedY);
     }
 }

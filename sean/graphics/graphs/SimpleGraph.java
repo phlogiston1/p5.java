@@ -23,15 +23,15 @@ public class SimpleGraph extends p5 {
         traces.add(i,trace);
     }
     public void setup(){
-        //traces = new ArrayList<Trace>();
+        traces = new ArrayList<Trace>();
         createCanvas(500,500);
         z = new ZoomableHelper();
-        //Trace t = new Trace();
+        Trace t = new Trace();
         //t.values.add(100.0);
         //t.values.add(50.0);
         //t.values.add(220.0);
         //t.color = new P5Color(0,255,0);
-        //traces.add(t);
+        traces.add(t);
         background(0);
     }
     int posX = 0, posY = getInstance().getHeight()/2;
@@ -44,7 +44,6 @@ public class SimpleGraph extends p5 {
         for(int i = 0; i < traces.size(); i++){
             posX = 0; posY = 250;
             for(int j = 0; j < traces.get(0).values.size(); j++){
-                System.out.println("drawing " + posX + " and " + posY);
                 stroke(traces.get(i).color);
                 strokeWeight(3);
                 line(posX, posY, posX + pointdistance, (Integer)traces.get(i).values.get(j).intValue() + getInstance().getHeight()/4);

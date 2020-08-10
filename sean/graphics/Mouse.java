@@ -115,5 +115,4 @@ public class Mouse extends Canvas implements MouseListener, MouseWheelListener{
         mouseWheel(new WheelEvent(0, e.getPreciseWheelRotation()));
         wheelIntegrated += e.getPreciseWheelRotation();
     }
-
 }
